@@ -1,0 +1,18 @@
+vagrant plugin install vagrant-vbguest
+
+Failed to mount folders in Linux guest. This is usually because
+the "vboxsf" file system is not available. Please verify that
+the guest additions are properly installed in the guest and
+can work properly. The command attempted was:
+
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` data /data
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` data /data
+
+The error output from the last command was:
+
+stdin: is not a tty
+mount: unknown filesystem type 'vboxsf'
+
+chef-client -z -o raspberry -c client.rb
+
+https://www.chef.io/blog/2013/10/31/chef-client-z-from-zero-to-chef-in-8-5-seconds/
