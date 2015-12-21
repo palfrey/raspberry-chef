@@ -1,6 +1,6 @@
 #!/bin/sh
 export DEBIAN_FRONTEND=noninteractive
-apt-get install -y chef
+apt-get install -y chef git
 if [ ! -d "/chef_bootstrap" ]; then
 	git clone http://github.com/palfrey/raspberry-chef /chef_bootstrap
 fi
