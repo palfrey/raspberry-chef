@@ -11,6 +11,7 @@ cookbook_file "/boot/wifi.conf" do
 end
 
 apt_package 'git'
+apt_package 'python-git'
 
 cookbook_file "/usr/local/bin/update_chef.py" do
     source "update_chef.py"
