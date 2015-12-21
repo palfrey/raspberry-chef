@@ -16,6 +16,7 @@ def internet_on():
         return False
 
 while True:
+    chdir("/")
     repo_url = None
     try:
         repo = Repo("/chef_data")
@@ -31,26 +32,25 @@ while True:
         sleep(5)
         continue
 
-    if repo_url == chef_url:
-        break
-    if exists("/chef_data"): # Existing data, but wrong URL
-        shutil.rmtree("/chef_data")
+    if repo_url != chef_url:
+        if exists("/chef_data"): # Existing data, but wrong URL
+            shutil.rmtree("/chef_data")
 
-    print "Trying Chef URL %s" % chef_url
+        print "Trying Chef URL %s" % chef_url
 
-    if internet_on():
-        try:
-            subprocess.check_call(["git", "clone", chef_url, "/chef_data"])
-            break
-        except subprocess.CalledProcessError:
-            print "error while calling chef, pausing"
+        if internet_on():
+            try:
+                subprocess.check_call(["git", "clone", chef_url, "/chef_data"])
+            except subprocess.CalledProcessError:
+                print "error while calling chef, pausing"
+                sleep(5)
+                continue
+        else:
+            print "Can't get to the internet, pausing"
             sleep(5)
-    else:
-        print "Can't get to the internet, pausing"
-        sleep(5)
+            continue
 
-chdir("/chef_data")
-while True:
+    chdir("/chef_data")
     chef_cookbook = open("/boot/chef-cookbook").read().strip()
     if chef_cookbook == "":
         print "No Chef cookbook specified in /boot/chef-cookbook"
@@ -62,4 +62,5 @@ while True:
         sleep(60 * 60) # Waiting an hour, because all ok
     except subprocess.CalledProcessError:
         print "error while calling chef, pausing"
-        sleep(10)
+        sleep(60)
+        continue
