@@ -1,6 +1,8 @@
 #!/bin/sh
 export DEBIAN_FRONTEND=noninteractive
 apt-get install -y chef git
+/etc/init.d/chef-client stop
+insserv --remove chef-client
 if [ ! -d "/chef_bootstrap" ]; then
 	git clone http://github.com/palfrey/raspberry-chef /chef_bootstrap
 fi
