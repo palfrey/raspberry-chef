@@ -12,6 +12,11 @@ end
 
 apt_package 'git'
 apt_package 'python-git'
+apt_package 'logrotate'
+
+cookbook_file "/etc/logrotate.d/update_chef" do
+    source "update_chef_logrotate"
+end
 
 cookbook_file "/usr/local/bin/update_chef.py" do
     source "update_chef.py"

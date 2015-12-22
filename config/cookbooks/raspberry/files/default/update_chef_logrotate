@@ -1,0 +1,11 @@
+/var/log/update-chef.log {
+        daily
+        missingok
+        rotate 5
+        compress
+        notifempty
+        sharedscripts
+        postrotate
+            /etc/init.d/update_chef restart > /dev/null
+        endscript
+}
