@@ -43,3 +43,6 @@ service "update_chef" do
     action [ :enable, :start ]
     provider Chef::Provider::Service::Init::Debian
 end
+
+apt_package 'ruby-dev'
+gem_package 'berkshelf'
