@@ -77,6 +77,9 @@ while True:
         continue
     try:
         subprocess.check_output(["git", "pull"])
+        if exists("Berksfile"):
+            subprocess.check_output(["berks", "install"])
+            subprocess.check_output(["berks", "vendor"])
         subprocess.check_output(["chef-client", "-z", "-c", "client.rb", "-o", chef_cookbook])
         sleep(60 * 60) # Waiting an hour, because all ok
     except subprocess.CalledProcessError, e:
