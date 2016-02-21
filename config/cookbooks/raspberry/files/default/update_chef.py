@@ -77,6 +77,7 @@ while True:
         continue
     try:
         subprocess.check_output(["git", "pull"])
+        subprocess.check_output(["git", "submodule", "update", "--init"])
         if exists("Berksfile"):
             subprocess.check_output(["berks", "install"])
             subprocess.check_output(["berks", "vendor"])
