@@ -38,11 +38,11 @@ cookbook_file "/etc/init.d/update_chef" do
     mode '0755'
 end
 
+apt_package 'ruby-dev'
+gem_package 'berkshelf'
+
 service "update_chef" do
     supports :status => true, :restart => true, :reload => true
     action [ :enable, :start ]
     provider Chef::Provider::Service::Init::Debian
 end
-
-apt_package 'ruby-dev'
-gem_package 'berkshelf'
