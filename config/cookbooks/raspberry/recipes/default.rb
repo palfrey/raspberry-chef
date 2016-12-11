@@ -39,7 +39,9 @@ cookbook_file "/etc/init.d/update_chef" do
 end
 
 apt_package 'ruby-dev'
-gem_package 'berkshelf'
+gem_package 'berkshelf' do
+    version '4.3.3'
+end
 
 service "update_chef" do
     supports :status => true, :restart => true, :reload => true
