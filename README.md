@@ -3,7 +3,7 @@ Chef bootstrap for Raspberry Pi
 
 This project creates an auto-updating [chef-zero](https://www.chef.io/blog/2013/10/31/chef-client-z-from-zero-to-chef-in-8-5-seconds/) based Raspberry Pi node.
 
-1. Write a Debian-based image to the SD card for your Pi (I advise the [Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/) image as a good small base)
+1. Write a Debian-based image to the SD card for your Pi (I advise the [Buster Lite](https://www.raspberrypi.org/downloads/raspbian/) image as a good small base)
 2. SSH into the node (possibly just `ssh pi@raspberrypi` with password "raspberry" if you're using the defaults)
 3. `wget https://raw.githubusercontent.com/palfrey/raspberry-chef/master/bootstrap.sh`
 4. `cat bootstrap.sh`

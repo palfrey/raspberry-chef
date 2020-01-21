@@ -46,5 +46,5 @@ end
 service "update_chef" do
     supports :status => true, :restart => true, :reload => true
     action [ :enable, :start ]
-    provider Chef::Provider::Service::Init::Debian
+    provider Chef::Provider::Service::Systemd
 end
