@@ -1,1 +1,4 @@
 .vagrant/
+vendor/
+.kitchen/
+Dockerfile-kitchen*

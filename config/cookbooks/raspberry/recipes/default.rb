@@ -1,3 +1,5 @@
+directory "/etc/network"
+
 cookbook_file "/etc/network/interfaces" do
   source "interfaces"
 end
@@ -39,6 +41,8 @@ cookbook_file "/etc/init.d/update_chef" do
 end
 
 apt_package 'ruby-dev'
+apt_package 'build-essential'
+
 gem_package 'berkshelf' do
     version '4.3.3'
 end

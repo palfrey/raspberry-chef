@@ -1,0 +1,22 @@
+---
+    driver_plugin: docker
+    driver_config:
+      privileged: true
+      use_sudo: false
+      eflags: container=docker
+      require_chef_omnibus: 13.12.14
+      run_command: /sbin/init
+    
+    provisioner:
+      chef_license: accept
+    
+    platforms:
+      - name: debian-buster
+        driver_config:
+          image: jrei/systemd-debian:10
+    
+    suites:
+      - name: default
+        run_list:
+          - recipe[raspberry]
+        attributes: {}
