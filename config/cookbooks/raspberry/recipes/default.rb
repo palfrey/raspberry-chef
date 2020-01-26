@@ -37,6 +37,11 @@ file "/boot/chef-cookbook" do
     content ""
 end
 
+file "/boot/chef-directory" do
+    action :create_if_missing
+    content ""
+end
+
 cookbook_file "/etc/init.d/update_chef" do
     source "update_chef_init"
     mode '0755'

@@ -82,6 +82,10 @@ while True:
     try:
         subprocess.check_output(["git", "pull"])
         subprocess.check_output(["git", "submodule", "update", "--init"])
+        if exists("/boot/chef-directory"):
+            folder = open("/boot/chef-directory").read().strip()
+            if folder != "":
+                chdir(folder)
         if exists("Berksfile"):
             subprocess.check_output(["berks", "install"])
             subprocess.check_output(["berks", "vendor"])
