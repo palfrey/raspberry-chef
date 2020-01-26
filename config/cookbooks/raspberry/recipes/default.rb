@@ -1,13 +1,17 @@
-cookbook_file "/etc/network/interfaces" do
-  source "interfaces"
+cookbook_file '/etc/systemd/network/20-wifi.network' do
+    source '20-wifi.network'
 end
 
 apt_package 'iw'
 apt_package 'wpasupplicant'
 
 cookbook_file "/boot/wifi.conf" do
-	action :create_if_missing
-	source "wifi.conf"
+    action :create_if_missing
+    source "wifi.conf"
+end
+
+link '/etc/wpa_supplicant/wpa_supplicant.conf' do
+    to '/boot/wifi.conf'
 end
 
 apt_package 'git'
