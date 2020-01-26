@@ -5,15 +5,16 @@ import subprocess
 from time import sleep
 from os.path import exists
 from os import chdir
-from git import Repo, NoSuchPathError
+from git import Repo, NoSuchPathError, InvalidGitRepositoryError
 import shutil
 import logging
+import sys
 
 logger = logging.getLogger(__name__)
 
 formatter = logging.Formatter('%(asctime)s - %(levelname)s: %(message)s')
 
-ch = logging.StreamHandler()
+ch = logging.StreamHandler(stream=sys.stdout)
 ch.setLevel(logging.DEBUG)
 ch.setFormatter(formatter)
 logger.addHandler(ch)
@@ -39,6 +40,9 @@ while True:
         repo_url = origin.url
     except NoSuchPathError:
         pass
+    except InvalidGitRepositoryError:
+        logger.warning("Bad data in /chef_data, removing")
+        shutil.rmtree("/chef_data")
 
     chef_url = open("/boot/chef-url").read().strip()
     result = urlparse(chef_url)
