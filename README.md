@@ -8,7 +8,7 @@ This project creates an auto-updating [chef-zero](https://www.chef.io/blog/2013/
 3. `wget https://raw.githubusercontent.com/palfrey/raspberry-chef/master/bootstrap.sh`
 4. `cat bootstrap.sh`
   * Read the contents of bootstrap.sh and make sure you understand it before just randomly running something I told you to.
-5. `sudo sh bootstrap.sh`
+5. `sudo bash bootstrap.sh`
 6. `sudo poweroff`
 
 You've now got an auto-updating SD card, which you can backup and re-use for other nodes. To configure it, there's a series of files in `/boot` which is a FAT32 partition, which means it'll get mounted on Linux, OS X or Windows which means you can configure it without having a working Pi.
