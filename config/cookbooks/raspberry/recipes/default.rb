@@ -57,3 +57,30 @@ service "update_chef" do
     action [ :enable, :start ]
     provider Chef::Provider::Service::Systemd
 end
+
+# Support for TP-Link Archer T2U AC600
+apt_package 'dkms'
+
+execute 'dkms add' do
+    command 'dkms add -m rtl8812au -v 5.3.4'
+    action :nothing
+end
+
+execute 'dkms build' do
+    command 'dkms build -m rtl8812au -v 5.3.4'
+    action :nothing
+end
+
+execute 'dkms install' do
+    command 'dkms install -m rtl8812au -v 5.3.4'
+    action :nothing
+end
+
+git '/usr/src/rtl8812au-5.3.4' do
+    repository 'https://github.com/jeremyb31/rtl8812au-1.git'
+    revision 'v5.3.4'
+    action :sync
+    notifies :run, 'execute[dkms add]', :immediately
+    notifies :run, 'execute[dkms build]', :immediately
+    notifies :run, 'execute[dkms install]', :immediately
+end
