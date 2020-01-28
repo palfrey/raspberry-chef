@@ -42,9 +42,19 @@ file "/boot/chef-directory" do
     content ""
 end
 
-cookbook_file "/etc/init.d/update_chef" do
-    source "update_chef_init"
-    mode '0755'
+execute 'systemctl daemon-reload' do
+    command 'systemctl daemon-reload'
+    action :nothing
+end
+
+directory '/usr/local/lib/systemd/system' do
+    recursive true
+end
+
+cookbook_file '/usr/local/lib/systemd/system/update_chef.service' do
+    source 'update_chef.service'
+    notifies :run, 'execute[systemctl daemon-reload]', :immediately
+    notifies :restart, 'service[update_chef]'
 end
 
 apt_package 'ruby-dev'
