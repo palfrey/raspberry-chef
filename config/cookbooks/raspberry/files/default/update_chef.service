@@ -11,8 +11,6 @@ Environment=PYTHONUNBUFFERED=1
 # Automatically restart the service if it crashes
 Restart=always
 
-# Really we want to use scan_user, but pygame doesn't play nicely without
-# root ("Unable to open a console terminal")
 User=root
 
 [Install]
