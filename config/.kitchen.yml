@@ -15,8 +15,8 @@
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
         - mkdir -p /run/systemd && echo 'docker' > /run/systemd/container
-        - mkdir -p /lib/modules/4.9.184-linuxkit/
-        - ln -s /usr/src/linux-headers-4.19.0-6-amd64/ /lib/modules/4.9.184-linuxkit/build
+        - mkdir -p /lib/modules/`uname -r`/
+        - ln -s /usr/src/linux-headers-4.19.0-6-amd64/ /lib/modules/`uname -r`/build
 
     provisioner:
       chef_license: accept
