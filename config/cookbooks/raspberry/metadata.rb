@@ -1,7 +1,11 @@
 name             'raspberry'
 maintainer       'Tom Parker'
 maintainer_email 'palfrey@tevp.net'
-license          'AGPL3'
+license          'AGPL-3.0-only'
 description      'Sets up a Raspberry Pi to use Chef'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.0'
+version          '0.2.0'
+source_url       'https://github.com/palfrey/raspberry-chef'
+issues_url       'https://github.com/palfrey/raspberry-chef/issues'
+chef_version     '>= 11'
+supports         'debian'

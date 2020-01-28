@@ -58,6 +58,8 @@ cookbook_file '/usr/local/lib/systemd/system/update_chef.service' do
 end
 
 apt_package 'ruby-dev'
+apt_package 'build-essential'
+
 gem_package 'berkshelf' do
     version '4.3.3'
 end
