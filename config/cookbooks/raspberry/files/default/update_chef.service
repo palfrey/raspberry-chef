@@ -1,0 +1,19 @@
+[Unit]
+Description=Pull and run Chef config
+
+[Service]
+ExecStart=/usr/local/bin/update_chef.py
+
+# Disable Python's buffering of STDOUT and STDERR, so that output from the
+# service shows up immediately in systemd's logs
+Environment=PYTHONUNBUFFERED=1
+
+# Automatically restart the service if it crashes
+Restart=always
+
+User=root
+
+[Install]
+# Tell systemd to automatically start this service when the system boots
+# (assuming the service is enabled)
+WantedBy=default.target
