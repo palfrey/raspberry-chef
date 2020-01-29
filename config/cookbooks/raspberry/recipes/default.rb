@@ -74,7 +74,7 @@ end
 apt_package 'dkms'
 
 machine_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['kernel']['machine']}"
-cpu_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node[:languages][:ruby][:target_cpu]}"
+cpu_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['languages']['ruby']['target_cpu']}"
 
 unless machine_path == cpu_path
     link machine_path do
