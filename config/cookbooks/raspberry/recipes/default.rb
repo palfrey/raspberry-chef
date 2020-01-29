@@ -83,23 +83,23 @@ unless machine_path == cpu_path
 end
 
 execute 'dkms add' do
-    command 'dkms add -m rtl8812au -v 5.3.4'
+    command 'dkms add -m rtl8812au -v 5.6.4.2'
     action :nothing
 end
 
 execute 'dkms build' do
-    command 'dkms build -m rtl8812au -v 5.3.4'
+    command 'dkms build -m rtl8812au -v 5.6.4.2'
     action :nothing
 end
 
 execute 'dkms install' do
-    command 'dkms install -m rtl8812au -v 5.3.4'
+    command 'dkms install -m rtl8812au -v 5.6.4.2'
     action :nothing
 end
 
-git '/usr/src/rtl8812au-5.3.4' do
-    repository 'https://github.com/jeremyb31/rtl8812au-1.git'
-    revision 'v5.3.4'
+git '/usr/src/rtl8812au-5.6.4.2' do
+    repository 'https://github.com/aircrack-ng/rtl8812au.git'
+    revision 'v5.6.4.2'
     action :sync
     notifies :run, 'execute[dkms add]', :immediately
     notifies :run, 'execute[dkms build]', :immediately
