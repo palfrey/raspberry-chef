@@ -73,6 +73,15 @@ end
 # Support for TP-Link Archer T2U AC600
 apt_package 'dkms'
 
+machine_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['kernel']['machine']}"
+cpu_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node[:languages][:ruby][:target_cpu]}"
+
+unless machine_path == cpu_path
+    link machine_path do
+        to cpu_path
+    end
+end
+
 execute 'dkms add' do
     command 'dkms add -m rtl8812au -v 5.3.4'
     action :nothing
