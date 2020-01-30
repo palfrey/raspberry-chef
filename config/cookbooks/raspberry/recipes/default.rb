@@ -90,6 +90,7 @@ end
 execute 'dkms build' do
     command 'dkms build -m rtl8812au -v 5.6.4.2'
     action :nothing
+    timeout 36000 # Build on a Raspberry Pi 1 is really slow
 end
 
 execute 'dkms install' do
