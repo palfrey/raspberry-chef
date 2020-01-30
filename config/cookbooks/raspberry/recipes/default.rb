@@ -10,6 +10,39 @@ cookbook_file "/boot/wifi.conf" do
     source "wifi.conf"
 end
 
+cookbook_file '/etc/edge-netdog.conf' do
+    source 'edge-netdog.conf'
+end
+
+netdog_platform = case node['kernel']['machine']
+when 'x86_64' then 'linux-amd64'
+when 'armv6l' then 'linux-arm6'
+else
+    Chef::Log.warn("Unsupported platform '#{node['kernel']['machine']}'")
+    ''
+end
+
+remote_file '/usr/bin/edge-netdog' do
+    source "https://github.com/nmcclain/edge-netdog/releases/download/v1.0.0/edge-netdog_#{netdog_platform}"
+    mode '0755'
+end
+
+cookbook_file '/usr/local/lib/systemd/system/edge_netdog.service' do
+    source 'edge_netdog.service'
+    notifies :run, 'execute[systemctl daemon-reload]', :immediately
+    notifies :restart, 'service[edge_netdog]'
+end
+
+service 'edge_netdog' do
+    supports :status => true, :restart => true, :reload => true
+    action [ :enable, :start ]
+    provider Chef::Provider::Service::Systemd
+end
+
+directory '/usr/local/lib/systemd/system' do
+    recursive true
+end
+
 link '/etc/wpa_supplicant/wpa_supplicant.conf' do
     to '/boot/wifi.conf'
 end
@@ -47,10 +80,6 @@ execute 'systemctl daemon-reload' do
     action :nothing
 end
 
-directory '/usr/local/lib/systemd/system' do
-    recursive true
-end
-
 cookbook_file '/usr/local/lib/systemd/system/update_chef.service' do
     source 'update_chef.service'
     notifies :run, 'execute[systemctl daemon-reload]', :immediately
@@ -73,12 +102,14 @@ end
 # Support for TP-Link Archer T2U AC600
 apt_package 'dkms'
 
-machine_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['kernel']['machine']}"
-cpu_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['languages']['ruby']['target_cpu']}"
+if node['languages']['ruby']['target_cpu'] != ""
+    machine_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['kernel']['machine']}"
+    cpu_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['languages']['ruby']['target_cpu']}"
 
-unless machine_path == cpu_path
-    link machine_path do
-        to cpu_path
+    unless machine_path == cpu_path
+        link machine_path do
+            to cpu_path
+        end
     end
 end
 

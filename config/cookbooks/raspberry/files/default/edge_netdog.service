@@ -1,0 +1,10 @@
+[Unit]
+Description=edge-netdog performs emergency remediation (such as a reboot) for edge devices when network connectivity has failed
+
+[Service]
+ExecStart=/usr/bin/edge-netdog /etc/edge-netdog.conf
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target
