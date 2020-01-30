@@ -1,3 +1,7 @@
+directory '/usr/local/lib/systemd/system' do
+    recursive true
+end
+
 cookbook_file '/etc/systemd/network/20-wifi.network' do
     source '20-wifi.network'
 end
@@ -37,10 +41,6 @@ service 'edge_netdog' do
     supports :status => true, :restart => true, :reload => true
     action [ :enable, :start ]
     provider Chef::Provider::Service::Systemd
-end
-
-directory '/usr/local/lib/systemd/system' do
-    recursive true
 end
 
 link '/etc/wpa_supplicant/wpa_supplicant.conf' do
