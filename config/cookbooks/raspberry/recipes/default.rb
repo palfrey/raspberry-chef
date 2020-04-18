@@ -101,6 +101,7 @@ end
 
 # Support for TP-Link Archer T2U AC600
 apt_package 'dkms'
+apt_package "linux-headers-#{node['kernel']['release']}"
 
 if node['languages']['ruby']['target_cpu'] != ""
     machine_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['kernel']['machine']}"
