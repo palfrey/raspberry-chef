@@ -11,4 +11,5 @@ before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
 
 script:
 - bundle exec foodcritic config/cookbooks/raspberry
+- apt-get install -y linux-headers-`uname -r`
 - cd config && bundle exec kitchen verify
