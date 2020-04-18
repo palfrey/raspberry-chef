@@ -9,7 +9,12 @@ install: bundle install
 # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
 before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
 
+dist: xenial
+addons:
+  apt:
+    packages:
+    - linux-headers-`uname -r`
+
 script:
 - bundle exec foodcritic config/cookbooks/raspberry
-- apt-get install -y linux-headers-`uname -r`
 - cd config && bundle exec kitchen verify
