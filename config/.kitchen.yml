@@ -15,9 +15,11 @@
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
         - mkdir -p /run/systemd && echo 'docker' > /run/systemd/container
+        - uname -r
         - mkdir -p /lib/modules/`uname -r`/
         - ln -s /usr/src/linux-headers-4.19.0-6-amd64/ /lib/modules/`uname -r`/build
         - ln -s /usr/src/linux-headers-4.19.0-6-amd64/ /usr/src/linux-headers-`uname -r`
+        - ls -l /usr/src/linux-headers-`uname -r`/
 
     provisioner:
       chef_license: accept
