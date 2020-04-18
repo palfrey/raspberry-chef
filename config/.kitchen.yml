@@ -23,7 +23,7 @@
       chef_license: accept
     
     platforms:
-      - name: debian-buster
+      - name: debian-buster-20200130
     
     suites:
       - name: default
