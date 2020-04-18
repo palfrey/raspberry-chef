@@ -23,7 +23,9 @@
       chef_license: accept
     
     platforms:
-      - name: debian-buster-20191224
+      - name: debian-buster
+        driver_config:
+          image: debian:buster-20191224
     
     suites:
       - name: default
