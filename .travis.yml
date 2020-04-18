@@ -16,5 +16,6 @@ addons:
     - linux-headers-`uname -r`
 
 script:
+- ls -l /usr/src/
 - bundle exec foodcritic config/cookbooks/raspberry
 - cd config && bundle exec kitchen verify
