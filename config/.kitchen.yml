@@ -11,6 +11,7 @@
         env: container=docker
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup
+        - /usr/src:/usr/src
       provision_command:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
