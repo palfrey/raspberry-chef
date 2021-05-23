@@ -94,7 +94,7 @@ gem_package 'chef-utils' do
 end
 
 gem_package 'ohai' do
-    version '<17' # Because later ones need Ruby 2.6
+    version '<16.6' # Because later ones need Ruby 2.6
 end
 
 gem_package 'berkshelf' do
