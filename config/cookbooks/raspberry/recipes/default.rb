@@ -90,11 +90,11 @@ apt_package 'ruby-dev'
 apt_package 'build-essential'
 
 gem_package 'chef-utils' do
-    version '<16.7' # Because later ones need Ruby 2.6
+    version '16.6.14' # Because later ones need Ruby 2.6
 end
 
 gem_package 'ohai' do
-    version '<16.6' # Because later ones need Ruby 2.6
+    version '16.5.6' # Because later ones need Ruby 2.6
 end
 
 gem_package 'berkshelf' do
