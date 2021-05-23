@@ -89,6 +89,10 @@ end
 apt_package 'ruby-dev'
 apt_package 'build-essential'
 
+gem_package 'chef-utils' do
+    version '<16.7' # Because later ones need Ruby 2.6
+end
+
 gem_package 'berkshelf' do
     version '4.3.3'
 end
