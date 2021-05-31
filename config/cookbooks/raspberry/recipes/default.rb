@@ -115,16 +115,6 @@ execute 'Check /usr/src' do
     live_stream true
 end
 
-kernel_platform = case node['kernel']['machine']
-when 'x86_64' then 'amd64'
-when 'armv6l' then 'arm64'
-else
-    Chef::Log.warn("Unsupported platform '#{node['kernel']['machine']}'")
-    ''
-end
-
-apt_package "linux-headers-#{kernel_platform}"
-
 if node['languages']['ruby']['target_cpu'] != ""
     machine_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['kernel']['machine']}"
     cpu_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['languages']['ruby']['target_cpu']}"
