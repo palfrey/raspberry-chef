@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+# Locked down to versions happy with Ruby 2.5
+gem 'berkshelf', '4.3.3'
+gem 'ohai', '16.5.6'
+gem 'chef-utils', '16.6.14'

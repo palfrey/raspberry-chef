@@ -89,16 +89,16 @@ end
 apt_package 'ruby-dev'
 apt_package 'build-essential'
 
-gem_package 'chef-utils' do
-    version '16.6.14' # Because later ones need Ruby 2.6
+gem_package 'bundler' do
+    version '2.2.19'
 end
 
-gem_package 'ohai' do
-    version '16.5.6' # Because later ones need Ruby 2.6
+cookbook_file '/tmp/Gemfile.raspberry-chef' do
+    source 'Gemfile'
 end
 
-gem_package 'berkshelf' do
-    version '4.3.3'
+execute 'install berkshelf' do
+    command 'bundle install --gemfile=/tmp/Gemfile.raspberry-chef'
 end
 
 service "update_chef" do
@@ -114,6 +114,16 @@ execute 'Check /usr/src' do
     command 'ls -l /usr/src'
     live_stream true
 end
+
+kernel_platform = case node['kernel']['machine']
+when 'x86_64' then 'amd64'
+when 'armv6l' then 'arm64'
+else
+    Chef::Log.warn("Unsupported platform '#{node['kernel']['machine']}'")
+    ''
+end
+
+apt_package "linux-headers-#{kernel_platform}"
 
 if node['languages']['ruby']['target_cpu'] != ""
     machine_path = "/usr/src/linux-headers-#{node['os_version']}/arch/#{node['kernel']['machine']}"
