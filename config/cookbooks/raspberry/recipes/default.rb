@@ -21,6 +21,7 @@ end
 netdog_platform = case node['kernel']['machine']
 when 'x86_64' then 'linux-amd64'
 when 'armv6l' then 'linux-arm6'
+when 'armv7l' then 'linux-arm7'
 else
     Chef::Log.warn("Unsupported platform '#{node['kernel']['machine']}'")
     ''
