@@ -1,6 +1,6 @@
 Chef bootstrap for Raspberry Pi
 -------------------------------
-[![Build Status](https://travis-ci.com/palfrey/raspberry-chef.svg?branch=master)](https://travis-ci.com/palfrey/raspberry-chef)
+[![CI](https://github.com/palfrey/raspberry-chef/actions/workflows/ci.yml/badge.svg)](https://github.com/palfrey/raspberry-chef/actions/workflows/ci.yml)
 
 This project creates an auto-updating [chef-zero](https://www.chef.io/blog/2013/10/31/chef-client-z-from-zero-to-chef-in-8-5-seconds/) based Raspberry Pi node.
 
