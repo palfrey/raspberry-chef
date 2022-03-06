@@ -18,6 +18,7 @@
         - uname -r
         - mkdir -p /lib/modules/`uname -r`/
         - ln -s /usr/src/linux-headers-*-amd64/ /lib/modules/`uname -r`/build
+        - ln -s /usr/src/linux-headers-*-amd64/ /usr/src/linux-headers-`uname -r`
       tmpfs:
         - /run
         - /run/lock
